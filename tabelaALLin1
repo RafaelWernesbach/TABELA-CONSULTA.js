@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TABELA</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .tabela {
+            margin-top: 3cm;
+        }
+
+        table {
+
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        thead th {
+            background-color: #f2f2f2;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tbody tr:hover {
+            background-color: #e2e2e2;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .botaoconsulta {
+            display: flex;
+            justify-content: center;
+            margin-top: 1cm;
+        }
+    </style>
+</head>
+
+<body>
+    <H1>TABELA DE NOTAS</H1>
+    <div class="tabela">
+        <table>
+            <thead>
+                <tr>
+                    <th>MATRICULA</th>
+                    <th>NOME</th>
+                    <th>FALTAS</th>
+                    <th>NOTA P1</th>
+                    <th>NOTA P2</th>
+                    <th>MEDIA</th>
+                    <th>NOTA PF</th>
+                    <th>MEDIA FINAL</th>
+                    <th>SITUAÇÃO</th>
+                </tr>
+            </thead>
+            <hr>
+            <tbody>
+                <tr>
+                    <td id="matricula">12312344</td>
+                    <td id="nome">EDIR PABLO SANTIAGO</td>
+                    <td>12</td>
+                    <td><input type="text" id="notaP1"></td>
+                    <td><input type="text" id="notaP2"></td>
+                    <td id="media">-</td>
+                    <td id="notaPF">-</td>
+                    <td id="mediaFinal">-</td>
+                    <td id="situacao">-</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="botaoconsulta">
+        <button onclick="consultar()">
+            <p>CONSULTAR</p>
+        </button>
+    </div>
+
+    <script>
+        function consultar() {
+            var notaP1 = parseFloat(document.getElementById("notaP1").value);
+            var notaP2 = parseFloat(document.getElementById("notaP2").value);
+
+            var media = (notaP1 + notaP2) / 2;
+            var mediaFinal = 0;
+            var situacao = "";
+
+            if (media < 7) {
+                alert("O aluno foi de comes.");
+                var notaPF = parseFloat(prompt("Insira a nota da prova final (PF):"));
+                mediaFinal = (media + notaPF) / 2;
+
+                if (mediaFinal < 6) {
+                    situacao = "rodou";
+                } else {
+                    situacao = "passo liso";
+                }
+            } else {
+                situacao = "passo no fino";
+            }
+
+            document.getElementById("media").textContent = media.toFixed(2);
+            document.getElementById("notaPF").textContent = notaPF.toFixed(2);
+            document.getElementById("mediaFinal").textContent = mediaFinal.toFixed(2);
+            document.getElementById("situacao").textContent = situacao;
+        }
+    </script>
+</body>
+
+</html>
